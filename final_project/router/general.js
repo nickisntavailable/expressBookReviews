@@ -52,6 +52,30 @@ async function getBookByISBN(isbn) {
     }
 }
 
+async function getBookByAuthor(author) {
+    try {
+        const response = await axious.get(
+            `http://localhost:5000/author/${encodeURIComponent(author)}`
+        );
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting books by author', error.message);
+    }
+}
+
+async function getBookByTitle(title) {
+    try {
+        const response = await axious.get(
+            `http://localhost:5000/title/${encodeURIComponent(title)}`
+        );
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting books by author', error.message);
+    }
+}
+
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   res.send(JSON.stringify(books, null, 4));
