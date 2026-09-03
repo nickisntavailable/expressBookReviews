@@ -2,6 +2,7 @@ const express = require('express');
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
+const axious = require('axios');
 const public_users = express.Router();
 
 
@@ -29,6 +30,16 @@ public_users.post("/register", (req,res) => {
 
   //   return res.status(300).json({message: "Yet to be implemented"});
 });
+
+async function getAllBooksAsync() {
+    try {
+        const response = await axious.get('http://localhost:5000/');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting books', error.message);
+    }
+}
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
