@@ -40,6 +40,17 @@ async function getAllBooksAsync() {
         console.error('Error getting books', error.message);
     }
 }
+async function getBookByISBN(isbn) {
+    try {
+        const response = await axious.get(
+            `http://localhost:5000/isbn/${isbn}`
+        );
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting books by ISBN', error.message);
+    }
+}
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
